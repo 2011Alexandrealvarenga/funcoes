@@ -1,0 +1,25 @@
+<div class="post-principal col-md-8 col-sm-12 pb-2" >
+            
+            <?php if(have_posts()) : while(have_posts()) : the_post(); ?>
+              <!-- PEGA A ESTRUTURA NA PAGINA CONTENT.PHP -->
+              <?php get_template_part('content', get_post_format()); ?>
+
+            <?php endwhile; ?>
+
+            <?php else : get_404_template();  endif; ?>
+
+            <div class="blog-pagination ">
+              <?php next_posts_link( 'Mais antigos' ); ?> <?php previous_posts_link( 'Mais novos' ); ?>
+            </div>
+
+
+
+          </div>
+
+
+<!--mais vistos -->
+          <div class="col-md-8 col-sm-12">
+             <?php   
+              dynamic_sidebar('Widget mais vistos');
+             ?>
+          </div>

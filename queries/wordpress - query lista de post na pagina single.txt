@@ -1,0 +1,28 @@
+// POST AUTHOR na single
+function wpb_related_author_posts($content) {
+ 
+if ( is_single() ) { 
+    global $authordata, $post;
+     
+    $content .= '<h4>Veja mais posts do autor:</h4> ';
+  
+    $authors_posts = get_posts( array( 
+      'author' => $authordata->ID, 
+      'post__not_in' => array( $post->ID ), 
+      'posts_per_page' => 5 
+    ) );
+  
+    $content .= '<ul>';
+    foreach ( $authors_posts as $authors_post ) {
+        $content .= '<li><a href="' . get_permalink( $authors_post->ID ) . '">' . apply_filters( 'the_title', $authors_post->post_title, $authors_post->ID ) . '</a></li>';
+    }
+    $content .= '</ul>';
+  
+    return $content;
+    } 
+    else { 
+    return $content; 
+    }
+}
+ 
+add_filter('the_content','wpb_related_author_posts');
